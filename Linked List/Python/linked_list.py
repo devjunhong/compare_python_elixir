@@ -67,12 +67,33 @@ class LinkedList(object):
 			if tail.data == data: 
 				prev.next_node = tail.next_node 
 
+	def delete_nth(self, n): 
+		""" Delete the node that occurs with n th position. 
+
+		Keyword arguments: 
+		n -- A number that indicates the position of the list.
+		"""
+		if n == 1: 
+			self.head = self.head.next
+		else:
+			node = self.head
+
+			while(node):
+				n -= 1
+				if n == 1:
+					if node.next_node is None: 
+						node.next_node = None
+					else:
+						node.next_node = node.next_node.next_node
+					break
+				node = node.next_node
+
 	def to_string(self): 
 		""" Print out internal data to the console. """
 		node = self.head 
 
 		while node is not None: 
-			print(node.data) 
+			print("\t", node.data) 
 			node = node.next_node
 
 def main():
@@ -85,27 +106,28 @@ def main():
 
 	# Printing out the result 
 	print("Print Linked List Iterate Result")
-
 	# expected to show -1, 0, 1, 2, 3, 4
 	linked.to_string()	
 
-	print("After remove 9")
-	linked.delete(9)
-
-	# expected to show -1, 0, 1, 2, 3, 4
+	print("After removing 3")
+	linked.delete(3)
+	# expected to show -1, 0, 1, 2, 4
 	linked.to_string()
 
-	print("After remove 4 and add first 5") 
+	print("After removing 4 and adding first 5") 
 	linked.delete(4) 
 	linked.add_first(5)
-	
-	# expected to show 5, -1, 0, 1, 2, 3
+	# expected to show 5, -1, 0, 1, 2
 	linked.to_string()
-	print("hello") 
 
+	print("After inserting 100 to next to the 0") 
 	linked.add_given(100, 0)
+	# expected to show 5, -1, 0, 100, 1, 2
+	linked.to_string()
 
-	# expected to show 5, -1, 0, 100, 1, 2, 3
+	print("After removing second item(-1)") 
+	linked.delete_nth(2)
+	# expected to show 5, -1, 100, 1, 2
 	linked.to_string()
 
 if __name__ == "__main__":

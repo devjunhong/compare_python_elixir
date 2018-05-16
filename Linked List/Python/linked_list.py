@@ -66,7 +66,7 @@ def test_swap(linked_list):
 	linked_list.to_string()
 
 	print("Swapping 5 and 0 ) see head is changed")
-	# linked.swapping(5, 0)
+	linked_list.swapping(5, 0)
 	# expected to show) 0, 1, 100, 5, 2
 	linked_list.to_string()
 

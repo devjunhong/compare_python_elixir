@@ -148,7 +148,21 @@ class LinkedList(object):
 		@type prev_node2: Node
 		@param prev_node2: 
 		"""
+		temp = node2.next_node
+
+		if prev_node1 is None:
+			self.head = node2
+		else:
+			prev_node1.next_node = node2
 		
+		node2.next_node = node1.next_node 
+
+		if prev_node2 is None:
+			self.head = node1
+		else:
+			prev_node2.next_node = node1
+
+		node1.next_node = temp
 
 	def swapping(self, first, second): 
 		""" Swapping the two value first and second."""
@@ -169,41 +183,5 @@ class LinkedList(object):
 
 		self.swap(first_prev_node, first_node, 
 			second_prev_node, second_node)
-		# if first_prev_node is None: 
-		# 	temp = first_node.next_node 
-		# 	second_prev_node.next_node = first_node
-		# 	first_node.next_node = second_node.next_node
-
-		# 	second_node.next_node = temp
-		# 	self.head = second_node
-		# 	return self
-		
+				
 		return self
-
-		# if first_node and second_node:
-		# 	if first_prev_node and second_prev_node:
-		# 		temp = second_node.next_node
-
-		# 		first_prev_node.next_node = second_node 
-		# 		second_node.next_node = first_node.next_node 
-
-		# 		second_prev_node.next_node = first_node 
-		# 		first_node.next_node = temp 
-		# 	elif first_prev_node is None: 
-		# 		# first_node is head
-		# 		print(first_node.data, second_node.data)
-		# 		temp = first_node.next_node
-
-		# 		first_node.next_node = second_node.next_node
-		# 		second_prev_node.next_node = first_node
-
-		# 		second_node.next_node = temp
-		# 		self.head = second_node
-		# 	elif second_prev_node is None: 
-		# 		self.head = first_node
-		# 		temp = second_node.next_node
-
-		# 		second_node.next_node = first_node.next_node
-		# 		first_prev_node.next_node = second_node 
-
-		# 		first_node.next_node = temp

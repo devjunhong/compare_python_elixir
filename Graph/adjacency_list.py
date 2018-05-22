@@ -27,7 +27,7 @@ def add(g, start, end):
 	@param: end, end vertex point for edge
 	"""
 	g[start].append(end)
-
+	g[end].append(start)
 	return g
 
 def print_graph(g):
@@ -53,18 +53,11 @@ def main():
 
 	g = add(g, 0, 1)
 	g = add(g, 0, 4)
-	g = add(g, 1, 0)
-	g = add(g, 1, 4)
 	g = add(g, 1, 2)
 	g = add(g, 1, 3)
-	g = add(g, 2, 1)
+	g = add(g, 1, 4)
 	g = add(g, 2, 3)
-	g = add(g, 3, 1)
 	g = add(g, 3, 4)
-	g = add(g, 3, 2)
-	g = add(g, 4, 3)
-	g = add(g, 4, 0)
-	g = add(g, 4, 1)
 	
 	print_graph(g)
 

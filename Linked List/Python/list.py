@@ -185,3 +185,21 @@ class LinkedList(object):
 			second_prev_node, second_node)
 				
 		return self
+
+	def reverse(self):
+		""" Reversing the linked list """
+		if self.head is None:
+			return self		
+
+		move = self.head
+		prev = None
+
+		while(move): 
+			temp = move.next_node
+			if temp is None: 
+				self.head = move
+			move.next_node = prev
+			prev = move
+			move = temp	
+
+		return self

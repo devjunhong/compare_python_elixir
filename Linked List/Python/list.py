@@ -6,7 +6,8 @@ class LinkedList(object):
 		self.head = node
 
 	def add_end(self, value): 
-		""" Add other node to the end of the list. 
+		"""
+		Add other node to the end of the list. 
 
 		Keyword arguments: 
 		value -- Create a node with this value and append to the end.
@@ -20,7 +21,8 @@ class LinkedList(object):
 		tail.next_node = node
 
 	def add_first(self, value): 
-		""" Add other node to the first of the list. 
+		"""
+		Add other node to the first of the list. 
 
 		Keyworad arguments: 
 		value -- Create a node with this value and append to the end.
@@ -30,7 +32,8 @@ class LinkedList(object):
 		self.head = node
 
 	def add_given(self, value, given): 
-		""" Add other node to the next of given value. 
+		"""
+		Add other node to the next of given value. 
 
 		Keyword arguments: 
 		node -- A node that will be next to the node matching 
@@ -48,7 +51,8 @@ class LinkedList(object):
 		value_node.next_node = node
 
 	def delete(self, data):
-		""" Delete the node same with data from the list. 
+		""" 
+		Delete the node same with data from the list. 
 
 		Keyword arguments: 
 		data -- A node with equal data will be deleted. 
@@ -64,7 +68,8 @@ class LinkedList(object):
 				prev.next_node = tail.next_node 
 
 	def delete_nth(self, n): 
-		""" Delete the node that occurs with n th position. 
+		""" 
+		Delete the node that occurs with n th position. 
 
 		Keyword arguments: 
 		n -- A number that indicates the position of the list.
@@ -114,56 +119,87 @@ class LinkedList(object):
 		else:
 			return 1 + self.get_length_rec_support(node.next_node)
 
+	def get_node_previous(self, target):
+		""" 
+		Get a node, value is target 
+		and the previous node
+		
+		@type target: number
+		@param target: find a node that has this value
+		@return prev_node, target_node
+		"""
+		move_node = self.head
+		prev_node = None
+
+		while(move_node):
+			if move_node.data == target:
+				return prev_node, move_node
+			prev_node = move_node
+			move_node = move_node.next_node
+
+		return None, None 
+
+	def swap(self, prev_node1, node1, prev_node2, node2):
+		"""
+		Swap node1 and node2
+
+		@type prev_node1: Node
+		@param prev_node1: previous node for node1
+		@type prev_node2: Node
+		@param prev_node2: 
+		"""
+		temp = node2.next_node
+
+		if prev_node1 is None:
+			self.head = node2
+		else:
+			prev_node1.next_node = node2
+		
+		node2.next_node = node1.next_node 
+
+		if prev_node2 is None:
+			self.head = node1
+		else:
+			prev_node2.next_node = node1
+
+		node1.next_node = temp
+
 	def swapping(self, first, second): 
-		""" Swapping the two node first and second."""
-		node = self.head
+		""" Swapping the two value first and second."""
+		first_prev_node, first_node = self.get_node_previous(first)
+		second_prev_node, second_node = self.get_node_previous(second)
 
-		first_node = None
-		second_node = None
-		first_prev_node = None 
-		second_prev_node = None 
+		# No first value in the list
+		if (first_prev_node is None and first_node is None):
+			return self
 
-		while(node):
-			if node.data == first:
-				first_node = node
-			elif node.data == second:
-				second_node = node
+		# No second value in the list
+		if (second_prev_node is None and second_node is None):
+			return self
 
-			if node.next_node is not None: 
-				if node.next_node.data == first:
-					first_prev_node = node
-				elif node.next_node.data == second:
-					second_prev_node = node
+		# If the first and second value is same.
+		if first_node == second_node:
+			return self
 
-			if first_prev_node and second_prev_node:
-				break
+		self.swap(first_prev_node, first_node, 
+			second_prev_node, second_node)
+				
+		return self
 
-			node = node.next_node
+	def reverse(self):
+		""" Reversing the linked list """
+		if self.head is None:
+			return self		
 
-		if first_node and second_node:
-			if first_prev_node and second_prev_node:
-				temp = second_node.next_node
+		move = self.head
+		prev = None
 
-				first_prev_node.next_node = second_node 
-				second_node.next_node = first_node.next_node 
+		while(move): 
+			temp = move.next_node
+			if temp is None: 
+				self.head = move
+			move.next_node = prev
+			prev = move
+			move = temp	
 
-				second_prev_node.next_node = first_node 
-				first_node.next_node = temp 
-			elif first_prev_node is None: 
-				# first_node is head
-				print(first_node.data, second_node.data)
-				temp = first_node.next_node
-
-				first_node.next_node = second_node.next_node
-				second_prev_node.next_node = first_node
-
-				second_node.next_node = temp
-				self.head = second_node
-			elif second_prev_node is None: 
-				self.head = first_node
-				temp = second_node.next_node
-
-				second_node.next_node = first_node.next_node
-				first_prev_node.next_node = second_node 
-
-				first_node.next_node = temp
+		return self

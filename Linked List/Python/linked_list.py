@@ -59,15 +59,21 @@ def test_swap(linked_list):
 	linked_list.swapping(0, 1)
 	# expected to show) 5, 1, 100, 0, 2
 	linked_list.to_string()
-
+	
 	print("Swapping -1 and 0 ) expecting no change")
 	linked_list.swapping(-1, 0)
 	# expected to show) 5, 1, 100, 0, 2
 	linked_list.to_string()
 
 	print("Swapping 5 and 0 ) see head is changed")
-	# linked.swapping(5, 0)
+	linked_list.swapping(5, 0)
 	# expected to show) 0, 1, 100, 5, 2
+	linked_list.to_string()
+
+def test_reverse(linked_list):
+	print("Reversing")
+	linked_list = linked_list.reverse()
+	# expected to show) 2, 5, 100, 1, 0
 	linked_list.to_string()
 
 def main():
@@ -81,6 +87,7 @@ def main():
 	test_length(linked)
 	test_length_recursive(linked)
 	test_swap(linked)
+	test_reverse(linked)
 	assert(False)
 
 if __name__ == "__main__":

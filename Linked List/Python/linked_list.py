@@ -71,10 +71,28 @@ def test_swap(linked_list):
 	linked_list.to_string()
 
 def test_reverse(linked_list):
-	print("Reversing")
+	print("Reversing, expect to see 2, 5, 100, 1, 0")
 	linked_list = linked_list.reverse()
 	# expected to show) 2, 5, 100, 1, 0
 	linked_list.to_string()
+
+def test_merge():
+	print("Merging, expect to see 2, 3, 5, 10, 15, 20")
+
+	# initialize the given first list
+	first_head = Node(5)
+	first_list = LinkedList(first_head)
+	first_list.add_end(10)
+	first_list.add_end(15)
+
+	# initialize the given second list
+	second_head = Node(2)
+	second_list = LinkedList(second_head)
+	second_list.add_end(3)
+	second_list.add_end(20)
+
+	new_list = first_list.sorted_merge(second_list)
+	new_list.to_string() 
 
 def main():
 	head, linked = initialize()
@@ -88,6 +106,7 @@ def main():
 	test_length_recursive(linked)
 	test_swap(linked)
 	test_reverse(linked)
+	test_merge()
 	assert(False)
 
 if __name__ == "__main__":

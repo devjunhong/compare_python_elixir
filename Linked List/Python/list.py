@@ -203,3 +203,42 @@ class LinkedList(object):
 			move = temp	
 
 		return self
+
+	def sorted_merge(self, other):
+		""" Merge the sorted linked list """ 
+
+		if self.head is None or other.head is None: 
+			return self
+
+		self_move = self.head 
+		other_move = other.head
+
+		new_head = None
+		if self.head.data < other.head.data:
+			new_head = Node(self.head.data)
+			self_move = first_move.next_node
+		else:
+			new_head = Node(other.head.data)
+			other_move = other_move.next_node 
+
+		new_list = LinkedList(new_head)
+
+		while(self_move and other_move):
+			if self_move.data < other_move.data:
+				new_list.add_end(self_move.data)
+				self_move = self_move.next_node
+			else:
+				new_list.add_end(other_move.data)
+				other_move = other_move.next_node
+
+		if self_move is None:
+			while(other_move):
+				new_list.add_end(other_move.data)
+				other_move = other_move.next_node
+
+		if other_move is None: 
+			while(self_move):
+				new_list.add_end(self_move.data)
+				self_move = self_move.next_node
+
+		return new_list
